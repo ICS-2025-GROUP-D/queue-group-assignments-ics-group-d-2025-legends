@@ -32,8 +32,17 @@ def cleanup_expired_jobs():
 # Example run
 if __name__ == "__main__":
     # Add some jobs
-    add_job("JobA", 0.1)  # expires quickly for demo
-    add_job("JobB", 1)    # expires in 1 minute
+    num_jobs = int(input("How many jobs do you want to add? "))
+
+for _ in range(num_jobs):
+    job_id = input("Enter Job ID: ")
+    try:
+        expiry = float(input("Enter expiry time (in minutes): "))
+        add_job(job_id, expiry)
+    except ValueError:
+        print("[ERROR] Please enter a valid number for expiry time.")
+
+    
 
     print("\n[WAIT] Waiting 10 seconds...\n")
     time.sleep(10)  # simulate waiting
