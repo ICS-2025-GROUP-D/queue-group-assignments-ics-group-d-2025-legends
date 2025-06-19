@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Queue Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Print Queue Status</h1>
+    <table id="queueTable">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Job ID</th>
+                <th>Priority</th>
+                <th>Wait Time</th>
+            </tr>
+        </thead>
+        <tbody id="queueBody"></tbody>
+    </table>
+
+    <script>
+        fetch("/queue_status")
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById("queueBody");
+                data.forEach(job => {
+                    const row = tableBody.insertRow();
+                    row.insertCell().textContent = job.user_id;
+                    row.insertCell().textContent = job.job_id;
+                    row.insertCell().textContent = job.priority;
+                    row.insertCell().textContent = job.wait_time;
+                });
+            });
+    </script>
+</body>
+</html>
