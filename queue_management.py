@@ -21,8 +21,8 @@ class CircularPrintQueue:
         self.rear = -1
         self.size = 0
         self.job_counter = 0
-        
-        #Thread synchronization for module 4 compatibility
+
+        # Thread synchronization for module 4 compatibility
         self._lock = threading.RLock()
 
     def is_full(self) -> bool:
@@ -83,49 +83,51 @@ class CircularPrintQueue:
                     return self.queue[index]
                 index = (index + 1) % self.capacity
             return None
-    
+
+
 class PrintQueueManager:
     """docstring for ClassName."""
-    def __init__(self, capacity: int 10):
+
+    def __init__(self, capacity: int var = 10):
         self.print_queue = CircularPrintQueue(capacity)
-        
-        """
-            Initialize each module here for the task you have been doing from module
-            1 to the last module 6 that way we have combined them to work together thus completed the 
-            assignment
-        """
-        
-        #Initializing Module 4 here: Concurrent Job Handler
-        self.concurrent_handler = ConcurrentJobHandler(max_threads = 5)
-        
-        
-    def send_simultaneous(self, job_data: str)-> str:
-        """HAndle simultaneous job submissions
 
-        Args:
-            job_data (str): Comma-separated string like "user1:priority1, user2:priority2"
+    """
+        Initialize each module here for the task you have been doing from module
+        1 to the last module 6 that way we have combined them to work together thus completed the 
+        assignment
+    """
 
-        Returns:
-            str: Formatted result string
-        """
-        try:
-            #parsing the job data using module 4
-            jobs = self.concurrent_handler.parse_simultaneous_command(job_data)
-            
-            if not jobs:
-                return f"Error: No valid jobs found in simultaneous submission"    
-            
-            #Execute simultaneous submissions using module 4
-            result = self.concurrent_handler.handle_simultaneous_submissions(
-                self.print_queue, jobs
-            )
-            
-            #Format and return the results using module 4
-            return self.concurrent_handler.format_submissions_results(
-                result, len(jobs)
-            )
-            
-        except ValueError as e:
-            return f"Error: {str(e)}"
-        except Exception as e:
-            return f"Error processing simultaneous submission: {str(e)}"
+    # Initializing Module 4 here: Concurrent Job Handler
+    self.concurrent_handler = ConcurrentJobHandler(max_threads=5)
+
+
+def send_simultaneous(self, job_data: str) -> str:
+    """HAndle simultaneous job submissions
+
+    Args:
+        job_data (str): Comma-separated string like "user1:priority1, user2:priority2"
+
+    Returns:
+        str: Formatted result string
+    """
+    try:
+        # parsing the job data using module 4
+        jobs = self.concurrent_handler.parse_simultaneous_command(job_data)
+
+        if not jobs:
+            return f"Error: No valid jobs found in simultaneous submission"
+
+            # Execute simultaneous submissions using module 4
+        result = self.concurrent_handler.handle_simultaneous_submissions(
+            self.print_queue, jobs
+        )
+
+        # Format and return the results using module 4
+        return self.concurrent_handler.format_submissions_results(
+            result, len(jobs)
+        )
+
+    except ValueError as e:
+        return f"Error: {str(e)}"
+    except Exception as e:
+        return f"Error processing simultaneous submission: {str(e)}"
