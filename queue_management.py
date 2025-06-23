@@ -88,7 +88,7 @@ class CircularPrintQueue:
 class PrintQueueManager:
     """docstring for ClassName."""
 
-    def __init__(self, capacity: int var = 10):
+    def __init__(self, capacity: int = 10):
         self.print_queue = CircularPrintQueue(capacity)
 
     """
