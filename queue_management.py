@@ -102,13 +102,14 @@ class PrintQueueManager:
 
 
 def send_simultaneous(self, job_data: str) -> str:
-    """HAndle simultaneous job submissions
+    """
+        Handle simultaneous job submissions
 
-    Args:
-        job_data (str): Comma-separated string like "user1:priority1, user2:priority2"
+        Args:
+            job_data (str): Comma-separated string like "user1:priority1, user2:priority2"
 
-    Returns:
-        str: Formatted result string
+        Returns:
+            str: Formatted result string
     """
     try:
         # parsing the job data using module 4
